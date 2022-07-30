@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "9c788a75",
         "name": "com.noobster.d3d2048",
-        "processId": 11764,
+        "processId": 17219,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -36,6 +36,18 @@
             "deviceId": "9c788a75",
             "name": "com.noobster.d3d2048",
             "processId": 11764,
+            "exited": false
+        },
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 12495,
+            "exited": false
+        },
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 17219,
             "exited": false
         }
     ],
