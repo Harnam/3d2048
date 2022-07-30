@@ -1,13 +1,44 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "9c788a75",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "9c788a75",
+        "name": "com.noobster.d3d2048",
+        "processId": 11764,
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 18598,
+            "exited": false
+        },
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 31159,
+            "exited": false
+        },
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 5105,
+            "exited": false
+        },
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 8320,
+            "exited": false
+        },
+        {
+            "deviceId": "9c788a75",
+            "name": "com.noobster.d3d2048",
+            "processId": 11764,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
@@ -41,9 +72,20 @@
         ]
     },
     "m_MemoryViewerState": {
-        "MemoryWindowHeight": 0.0,
-        "MemoryWindowWidth": 0.0,
-        "MemoryTypeEnabled": [],
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
         "MemoryGroup": 2,
         "Behavior": 0
     },
