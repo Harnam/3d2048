@@ -370,7 +370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1678429372
 Transform:
   m_ObjectHideFlags: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 4309406865495122001, guid: f9b7c89b42a8f464fbc8f8fa08ad47c1, type: 3}
-  parent: {fileID: 1726295457}
+  parent: {fileID: 1989660081}
   gridsize: 4
 --- !u!1 &1989660081
 GameObject:
