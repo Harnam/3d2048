@@ -7,40 +7,35 @@ public class Tile : MonoBehaviour
     //[HideInInspector]
     public int val, gridX, gridY, gridZ;
 
-    //private Dictionary<int, Color> colorVal = new Dictionary<int, Color>()
-    //{
-    //    { 2, (new Color32(238,228,218,255)) },
-    //    { 4, (new Color32(237,224,200,255)) },
-    //    { 8, (new Color32(242,177,121,255)) },
-    //    { 16, (new Color32(245,149,99,255)) },
-    //    { 32, (new Color32(246,124,95,255)) },
-    //    { 64, (new Color32(246,94,59,255)) },
-    //    { 128, (new Color32(237,207,114,255)) },
-    //    { 256, (new Color32(237,204,97,255)) },
-    //    { 512, (new Color32(237,200,80,255)) },
-    //    { 1024, (new Color32(237,197,63,255)) },
-    //    { 2048, (new Color32(237,194,46,255)) },
-    //    { 4096, (new Color32(62,57,51,255)) }
-    //};
-    private Dictionary<int, Color> colorVal = new Dictionary<int, Color>() // very bright different colors for testing to differentiate
+    public Texture2D[] texs = new Texture2D[11];
+    private Dictionary<int, Texture2D> colorVal = new Dictionary<int, Texture2D>() // very bright different colors for testing to differentiate
     {
-        { 2, Color.yellow },
-        { 4, Color.red },
-        { 8, Color.green },
-        { 16, Color.blue },
-        { 32, Color.cyan },
-        { 64, Color.magenta },
-        { 128, Color.white },
-        { 256, (new Color32(237,204,97,255)) },
-        { 512, (new Color32(237,200,80,255)) },
-        { 1024, (new Color32(237,197,63,255)) },
-        { 2048, (new Color32(237,194,46,255)) },
-        { 4096, (new Color32(62,57,51,255)) }
+        { 2, null },
+        { 4, null },
+        { 8, null },
+        { 16, null },
+        { 32, null },
+        { 64, null },
+        { 128, null },
+        { 256, null },
+        { 512, null },
+        { 1024, null },
+        { 2048, null },
     };
-
 
     private void OnEnable()
     {
+        colorVal[2] = texs[0];
+        colorVal[4] = texs[1];
+        colorVal[8] = texs[2];
+        colorVal[16] = texs[3];
+        colorVal[32] = texs[4];
+        colorVal[64] = texs[5];
+        colorVal[128] = texs[6];
+        colorVal[256] = texs[7];
+        colorVal[512] = texs[8];
+        colorVal[1024] = texs[9];
+        colorVal[2048] = texs[10];
         val = (Random.Range(0, 2) == 0)?2:4;
         updateColor();
         Spawner.updatepos += updatePos;
@@ -59,7 +54,7 @@ public class Tile : MonoBehaviour
 
     void updateColor()
     {
-        
-        gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color", colorVal[val]);
+
+        gameObject.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", colorVal[val]); ;
     }
 }
