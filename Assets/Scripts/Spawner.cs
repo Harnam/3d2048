@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
         if (needToSpawn) spawnTile();
     }
 
-    void moveZAxis(int side)
+     public void moveZAxis(int side)
     {
         switch (frame.GetComponent<Frame>().state)
         {
@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
         needToSpawn = true;
     }
 
-    void moveVertical(int side)
+    public void moveVertical(int side)
     {
         if(side == 0) side = (Input.GetAxisRaw("Vertical") < 0) ? -1 : 1;
         switch (frame.GetComponent<Frame>().state)
@@ -105,7 +105,7 @@ public class Spawner : MonoBehaviour
         needToSpawn = true;
     }
 
-    void moveHorizontal(int side)
+    public void moveHorizontal(int side)
     {
         if(side == 0) side = (Input.GetAxisRaw("Horizontal") < 0) ? -1 : 1;
         switch (frame.GetComponent<Frame>().state)
