@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     public static event updatePos updatepos;
 
     [SerializeField]
-    private GameObject tile, parent;
+    private GameObject tile, parent, frame;
     public int gridsize = 4;
 
     public static float[] posi = { -1.5f, -0.5f, 0.5f, 1.5f };
@@ -17,11 +17,12 @@ public class Spawner : MonoBehaviour
     
     public Dictionary<int, GameObject> tiles = new Dictionary<int, GameObject>();
 
-    private bool needToSpawn = false;
+    private bool needToSpawn, isPlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        isPlaying = true;
         for (int i = 1; i <= gridsize; i++)
             for (int j = 1; j <= gridsize; j++)
                 for (int k = 1; k <= gridsize; k++)
@@ -31,14 +32,17 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Horizontal"))
-            moveHorizontal();
-        else if (Input.GetButtonDown("Vertical"))
-            moveVertical();
-        else if (Input.GetKeyDown(KeyCode.Q))
-            moveZAxis(1);
-        else if (Input.GetKeyDown(KeyCode.E))
-            moveZAxis(-1);
+        if (isPlaying)
+        {
+            if (Input.GetButtonDown("Horizontal"))
+                moveHorizontal(0);
+            else if (Input.GetButtonDown("Vertical"))
+                moveVertical(0);
+            else if (Input.GetKeyDown(KeyCode.Q))
+                moveZAxis(1);
+            else if (Input.GetKeyDown(KeyCode.E))
+                moveZAxis(-1);
+        }
     }
 
     private void LateUpdate()
@@ -48,36 +52,89 @@ public class Spawner : MonoBehaviour
 
     void moveZAxis(int side)
     {
-        move(false, false, true, side);
+        switch (frame.GetComponent<Frame>().state)
+        {
+            case 0:
+                move(false, false, true, side);
+                break;
+            case 1:
+                move(true, false, false, -side);
+                break;
+            case 2:
+                move(true, false, false, side);
+                break;
+            case 3:
+                move(false, true, false, -side);
+                break;
+            case 4:
+                move(false, true, false, side);
+                break;
+            default:
+                move(false, false, true, -side);
+                break;
+        }
         updatepos?.Invoke();
         needToSpawn = true;
     }
 
-    void moveVertical()
+    void moveVertical(int side)
     {
-        int side = (Input.GetAxisRaw("Vertical") < 0) ? -1 : 1;
-        move(false, true, false, side);
+        if(side == 0) side = (Input.GetAxisRaw("Vertical") < 0) ? -1 : 1;
+        switch (frame.GetComponent<Frame>().state)
+        {
+            case 0:
+                move(false, true, false, side);
+                break;
+            case 1:
+                move(false, true, false, side);
+                break;
+            case 2:
+                move(false, true, false, side);
+                break;
+            case 3:
+                move(false, false, true, side);
+                break;
+            case 4:
+                move(false, false, true, -side);
+                break;
+            default:
+                move(false, true, false, side);
+                break;
+        }
         updatepos?.Invoke();
         needToSpawn = true;
     }
 
-    void moveHorizontal()
+    void moveHorizontal(int side)
     {
-        int side = (Input.GetAxisRaw("Horizontal") < 0) ? -1 : 1;
-        move(true, false, false, side);
+        if(side == 0) side = (Input.GetAxisRaw("Horizontal") < 0) ? -1 : 1;
+        switch (frame.GetComponent<Frame>().state)
+        {
+            case 0:
+                move(true, false, false, side);
+                break;
+            case 1:
+                move(false, false, true, side);
+                break;
+            case 2:
+                move(false, false, true, -side);
+                break;
+            case 3:
+                move(true, false, false, side);
+                break;
+            case 4:
+                move(true, false, false, side);
+                break;
+            default:
+                move(true, false, false, -side);
+                break;
+        }
         updatepos?.Invoke();
         needToSpawn = true;
     }
 
     void spawnTile()
-    {
-        //Debug.Log(empty.Count);
-        //Debug.Log((tiles.Count != 0)?tiles.Keys:"waits");
-
-
-        //int[] rands = new int[empty.Count]; empty.Keys.CopyTo(rands, 0);
-        //int rand = rands[Random.Range(0, empty.Count)];
-        
+    {   
         List<int> emp = new List<int>();
         foreach (KeyValuePair<int, bool> i in empty)
             if (i.Value) emp.Add(i.Key);
@@ -99,7 +156,7 @@ public class Spawner : MonoBehaviour
         needToSpawn = false;
     }
 
-    void move(bool x, bool y, bool z, int side) //side positive for right
+    void move(bool x, bool y, bool z, int side)
     {
         for (int i = 1; i <= 4; i++)
         {
@@ -171,16 +228,3 @@ public class Spawner : MonoBehaviour
     }
 
 }
-
-//if (!empty[key] && !empty[key - 1])
-//{
-//    Tile thistile = tiles[key].GetComponent<Tile>();
-//    Tile nexttile = tiles[key - 1].GetComponent<Tile>();
-//    if (thistile.val == nexttile.val)
-//    {
-//        thistile.val *= 2;
-//        empty[key - 1] = true;
-//        tiles.Remove(key - 1);
-//        Destroy(nexttile.gameObject);
-//    }
-//}
